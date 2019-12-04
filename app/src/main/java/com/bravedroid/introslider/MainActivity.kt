@@ -1,5 +1,6 @@
 package com.bravedroid.introslider
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
@@ -40,11 +41,28 @@ class MainActivity : AppCompatActivity() {
         setCurrentIndicators(0)
         introSliderViewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    setCurrentIndicators(position)
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                setCurrentIndicators(position)
+            }
+        })
+        buttonNext.setOnClickListener {
+            if (introSliderViewPager.currentItem + 1 < introSliderAdapter.itemCount) {
+                introSliderViewPager.currentItem += 1
+            } else {
+                Intent(applicationContext, AnotherActivity::class.java).also {
+                    startActivity(it)
+                    finish()
                 }
-            })
+            }
+            textSkip.setOnClickListener {
+                Intent(applicationContext, AnotherActivity::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
+            }
+        }
     }
 
     private fun setupIndicators() {
