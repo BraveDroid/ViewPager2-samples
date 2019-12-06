@@ -1,4 +1,4 @@
-package com.bravedroid.introslider
+package com.bravedroid.introslider.intro.model
 
 data class IntroSlide(
     val title: String,
